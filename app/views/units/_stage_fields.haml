@@ -1,0 +1,24 @@
+%form
+  .form-group
+    %label{"for" => "stageName"} Stage's name
+    %input.form-control{"id" => "stageName", "ng-model" => "stage.name"}
+
+  .form-group
+    %label{"for" => "stageName"} Stage tag names
+    %br
+    .row
+      .form-group.col-lg-2{"ng-repeat" => "state in stage.states"}
+        .input-group
+          %span.input-group-addon
+            %span.label{"class" => "label-{{state}}"}= raw('&nbsp')
+          %input.form-control{"id" => "stageName", "ng-model" => "stateDescriptor[state]", "maxlength" => 20}
+    
+  .form-group.pull-right
+    .btn-group
+      %a.btn.btn-default{"ng-click" => "saveStage()"}
+        %span.glyphicon.glyphicon-floppy-disk
+        Save
+        
+      %a.btn.btn-default{"ng-click" => "getStage()"}
+        %span.glyphicon.glyphicon-remove
+        Cancel

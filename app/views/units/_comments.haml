@@ -1,0 +1,20 @@
+%form
+  .form-group
+    %textarea.form-control{ "ng-model " => "newComment.text",
+                            "rows" => 3, 
+                            "placeholder" => "Comment goes here..."  }
+
+  .btn-group.btn-group-justified{"ng-show" => "newComment.text.length > 0"}
+    %a.btn.btn-default{"ng-click" => "openedTask().addComment(newComment); newComment = {}"}
+      Comment
+
+
+%hr{"ng-show" => "openedTask().comments.length > 0"}
+.list-group
+  .list-group-item{"ng-repeat" => "comment in openedTask().comments"}
+    %a.btn.btn-default.btn-xs.pull-right{"ng-click" => "openedTask().removeComment(comment)"}
+      %span.glyphicon.glyphicon-trash
+    %h5 Author
+    {{comment.text}}
+    
+  

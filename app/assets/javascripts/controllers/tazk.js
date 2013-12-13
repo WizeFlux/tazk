@@ -1,0 +1,1 @@
+var tazk = angular.module('tazk', ['ngResource']);

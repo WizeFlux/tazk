@@ -1,0 +1,50 @@
+%p.lead{  "ng-hide" => "task.editing() || task.open()",
+          "ng-repeat-start" => "task in stage.tasks | filter:tasksFilter:true"  }
+  %span.label{"class" => "label-{{task.state}}", "ng-bind" => "stateDescriptor[task.state]"}
+  %a{"href" => true, "ng-bind" => "task.text || 'Unnamed task'", "ng-click" => "openTask(task)"}
+
+
+%p.well.well-sm.lead{ "ng-show" => "task.open() && !task.editing()"}
+  %span.label{"class" => "label-{{task.state}}", "ng-bind" => "stateDescriptor[task.state]"}
+  {{task.text || 'Unnamed task'}}
+
+.btn-toolbar{ "ng-show" => "task.open() && !task.editing()"}
+  .btn-group
+    %a.btn.btn-default{"ng-click" => "task.editing(1)"}
+      %span.glyphicon.glyphicon-pencil
+      Edit
+
+  .btn-group.pull-right
+    %a.btn.btn-default{"ng-click" => "task.open(0)"}
+      %span.glyphicon.glyphicon-forward
+      Return to index
+
+
+
+%form{"ng-show" => "task.editing()", "ng-repeat-end" => "true"}
+  .form-group
+    %textarea.form-control.input-lg{  "ng-model " => "task.text",
+                                      "rows" => 4, 
+                                      "placeholder" => "Task description goes here..."  }
+  .btn-toolbar
+    .btn-group
+      %a.btn{ "ng-repeat" => "state in stage.states",
+              "ng-click" => "task.state = state",
+              "class" => "btn-{{state}}",
+              "ng-class" => "{active: task.state == state}" }
+        %span.glyphicon.glyphicon-check{"ng-show" => "task.state == state"}
+        %span.glyphicon.glyphicon-unchecked{"ng-hide" => "task.state == state"}
+        %span{"ng-show" => "task.state == state", "ng-bind" => "stateDescriptor[state]"}
+
+    .btn-group.pull-right{"ng-if" => "task.editing()"}
+      %a.btn.btn-default{"ng-click" => "removeTask(task)", "ng-if" => "task.id"}
+        %span.glyphicon.glyphicon-trash
+  
+    .btn-group.pull-right{"ng-if" => "task.editing()"}
+      %a.btn.btn-default{"ng-click" => "task.id ? task.$save() : task.$create()"}
+        %span.glyphicon.glyphicon-floppy-disk
+        Save
+
+      %a.btn.btn-default{"ng-click" => "task.id ? task.$get() : removeTask(task)"}
+        %span.glyphicon.glyphicon-remove
+        Cancel

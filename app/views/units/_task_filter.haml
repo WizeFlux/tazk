@@ -1,0 +1,13 @@
+%ul.list-inline
+  %li{"ng-repeat" => "state in stage.states"}
+    .btn-group
+      %label.btn{ "for" => "filter-{{state}}",
+                  "class" => "btn-{{state}}",
+                  "ng-class" => "{active: !!filteringStates[$index]}" }
+              
+        %input{ "id" => "filter-{{state}}",
+                "type" => "checkbox",
+                "ng-model" => "filteringStates[$index]",
+                "ng-true-value" => "{{state}}"  }
+        {{stateDescriptor[state]}}
+%br

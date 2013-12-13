@@ -1,0 +1,12 @@
+.page-header
+  %h1
+    {{stage.name}}
+        
+    %a.btn.btn-default{"ng-click" => "stage.isEditing = true", "ng-hide" => "stage.isEditing"}
+      %span.glyphicon.glyphicon-pencil
+      Edit stage
+
+    %a.btn.btn-default.pull-right{  "ng-click" => "newTask()",
+                                    "ng-show" => "(!openedTask() || !!openedTask().id) && !stage.isEditing" }
+      %span.glyphicon.glyphicon-file
+      New task
