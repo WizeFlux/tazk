@@ -4,5 +4,4 @@ class Task < ActiveRecord::Base
     
   has_many :comments
   belongs_to :stage
-  # belongs_to :owner, class_name: 'Person'  
 end
