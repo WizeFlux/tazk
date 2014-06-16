@@ -24,4 +24,6 @@ group :development, :test do
   gem 'ffaker'
 end
 
+
+gem 'therubyracer'
 gem 'jbuilder', '~> 1.2'
